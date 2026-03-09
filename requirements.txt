@@ -23,6 +23,7 @@ Faker==40.4.0
 filelock==3.20.3
 fonttools==4.57.0
 future==1.0.0
+gunicorn==25.1.0
 huepy==1.2.1
 idna==3.10
 ImageIO==2.37.2
