@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.container{
+width:80%;
+margin:auto;
+}
+
+.search-box{
+margin:20px 0;
+text-align:center;
+}
+
+.search-box input{
+width:60%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.search-box button{
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.post-card{
+border:1px solid #ddd;
+border-radius:8px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.post-card img{
+width:60%;
+height:auto;
+max-height:300px;
+display:block;
+margin:auto;
+border-radius:5px;
+}
+
+.post-title{
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.post-desc{
+margin:10px 0;
+}
+
+.author{
+color:gray;
+font-size:14px;
+}
+
+.actions a{
+margin-right:10px;
+text-decoration:none;
+color:white;
+background:#28a745;
+padding:5px 10px;
+border-radius:4px;
+}
+
+.delete-btn{
+background:#dc3545;
+}
+
+.pagination{
+text-align:center;
+margin-top:30px;
+}
+
+.pagination a{
+padding:8px 12px;
+border:1px solid #ccc;
+margin:5px;
+text-decoration:none;
+border-radius:4px;
+}
+
+</style>
+
+
+<div class="container">
+
+<h1 style="text-align:center;">All Posts</h1>
+
+<!-- SEARCH BAR -->
+
+<div class="search-box">
+<form method="GET" action="{% url 'search' %}">
+<input type="text" name="query" placeholder="Search posts...">
+<button type="submit">Search</button>
+</form>
+</div>
+
+
+<!-- POSTS -->
+
+{% for post in page_obj %}
+
+<div class="post-card">
+
+{% if post.Image %}
+<img src="{{ post.Image.url }}" alt="post image">
+{% endif %}
+
+<div class="post-title">
+{{ post.Title }}
+</div>
+
+<div class="post-desc">
+{{ post.Description }}
+</div>
+
+<div class="author">
+Author : {{ post.user.username }}
+</div>
+
+{% if request.user == post.user %}
+
+<div class="actions" style="margin-top:10px;">
+
+<a href="{% url 'update_post' post.id %}">Edit</a>
+
+<a href="{% url 'delete_post' post.id %}" class="delete-btn">Delete</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+
+
+<!-- PAGINATION -->
+
+<div class="pagination">
+
+{% if page_obj.has_previous %}
+
+<a href="?page=1">First</a>
+
+<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+
+{% endif %}
+
+<span>
+Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+</span>
+
+{% if page_obj.has_next %}
+
+<a href="?page={{ page_obj.next_page_number }}">Next</a>
+
+<a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

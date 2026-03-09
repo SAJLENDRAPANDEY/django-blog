@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<style>
+
+.about-container{
+width:70%;
+margin:auto;
+padding:30px;
+}
+
+.about-card{
+border:1px solid #ddd;
+padding:25px;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+.about-card h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+.about-section{
+margin-top:20px;
+}
+
+.about-section h3{
+color:#333;
+}
+
+.about-section p{
+color:#555;
+line-height:1.6;
+}
+
+.back-home{
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+color:white;
+background:#007bff;
+padding:8px 15px;
+border-radius:5px;
+}
+
+</style>
+
+
+<div class="about-container">
+
+<a class="back-home" href="{% url 'index' %}">← Back to Home</a>
+
+<div class="about-card">
+
+<h1>About This Blog</h1>
+
+<div class="about-section">
+
+<h3>📌 Our Mission</h3>
+<p>
+This blogging platform is built using Django to share useful knowledge, ideas, and experiences.
+The goal of this website is to provide a simple platform where users can read and create posts easily.
+</p>
+
+</div>
+
+<div class="about-section">
+
+<h3>📝 What You Can Do Here</h3>
+<p>
+• Read interesting blog posts<br>
+• Create and publish your own posts<br>
+• Upload images with posts<br>
+• Edit or delete your posts<br>
+• Search posts easily
+</p>
+
+</div>
+
+<div class="about-section">
+
+<h3>⚙️ Technologies Used</h3>
+<p>
+This website is built using:
+<br>
+• Django (Backend Framework)<br>
+• HTML & CSS (Frontend Design)<br>
+• SQLite Database<br>
+• Django Authentication System
+</p>
+
+</div>
+
+<div class="about-section">
+<h3>👨‍💻 About the Developer</h3>
+<p>
+Hi, I'm <b>Sajlendra Pandey</b>, a Computer Science Engineering student specializing in Data Science.
+This blogging platform was built using Django as a learning project to practice backend development,
+database handling, and building real-world web applications.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.form-container{
+width:50%;
+margin:auto;
+margin-top:40px;
+}
+
+.form-card{
+border:1px solid #ddd;
+padding:30px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+background:white;
+}
+
+.form-card h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.btn{
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.save-btn{
+background:#28a745;
+color:white;
+}
+
+.cancel-btn{
+background:#dc3545;
+color:white;
+margin-left:10px;
+text-decoration:none;
+padding:10px 20px;
+border-radius:5px;
+}
+
+</style>
+
+
+<div class="form-container">
+
+<div class="form-card">
+
+<h1>Edit Post</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="btn save-btn" type="submit">Update Post</button>
+
+<a href="{% url 'index' %}" class="cancel-btn">Cancel</a>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.form-container{
+width:50%;
+margin:auto;
+margin-top:40px;
+}
+
+.form-card{
+border:1px solid #ddd;
+padding:30px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.form-card h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.submit-btn{
+background:#007bff;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.submit-btn:hover{
+background:#0056b3;
+}
+
+</style>
+
+
+<div class="form-container">
+
+<div class="form-card">
+
+<h1>Create New Post</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="submit-btn" type="submit">Save Post</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

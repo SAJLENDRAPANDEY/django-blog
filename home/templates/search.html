@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.search-container{
+width:70%;
+margin:auto;
+margin-top:30px;
+}
+
+.search-box{
+text-align:center;
+margin-bottom:30px;
+}
+
+.search-box input{
+width:60%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.search-box button{
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.post-card{
+border:1px solid #ddd;
+padding:20px;
+margin-bottom:20px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+background:white;
+}
+
+.post-title{
+font-size:20px;
+font-weight:bold;
+}
+
+.post-desc{
+margin:10px 0;
+}
+
+.author{
+color:gray;
+font-size:14px;
+}
+
+.actions a{
+margin-right:10px;
+text-decoration:none;
+padding:5px 10px;
+border-radius:4px;
+color:white;
+background:#28a745;
+}
+
+.delete-btn{
+background:#dc3545;
+}
+
+.no-result{
+text-align:center;
+margin-top:30px;
+color:#777;
+}
+
+</style>
+
+
+<div class="search-container">
+
+<h2 style="text-align:center;">Search Results</h2>
+
+<!-- SEARCH BAR -->
+
+<div class="search-box">
+
+<form method="GET" action="{% url 'search' %}">
+
+<input type="text" name="query" placeholder="Search posts...">
+
+<button type="submit">Search</button>
+
+</form>
+
+</div>
+
+<hr>
+
+
+{% if posts %}
+
+{% for post in posts %}
+
+<div class="post-card">
+
+<div class="post-title">
+{{ post.Title }}
+</div>
+
+{% if post.Image %}
+<div class="post-image">
+<img src="{{ post.Image.url }}" alt="post image">
+</div>
+{% endif %}
+
+<div class="post-desc">
+{{ post.Description }}
+</div>
+
+<div class="author">
+Author: {{ post.user.username }}
+</div>
+
+<br>
+
+{% if request.user == post.user %}
+
+<div class="actions">
+
+<a href="{% url 'update_post' post.id %}">Edit</a>
+
+<a href="{% url 'delete_post' post.id %}" class="delete-btn">Delete</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="no-result">
+
+<h3>No posts found 😔</h3>
+
+<p>Try searching with different keywords.</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

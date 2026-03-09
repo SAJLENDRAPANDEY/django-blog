@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ post.Title }}</h1>
+<p>{{ post.Description }}</p>
+<p><small>{{ post.Created_at }}</small></p>
+
+<a href="/">⬅ Back</a>
+
+{% endblock %}

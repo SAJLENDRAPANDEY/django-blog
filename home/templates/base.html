@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{% block title %}My Blog{% endblock %}</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#222;
+color:white;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.nav-left a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.nav-left a:hover{
+color:#00bcd4;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+}
+
+.nav-right a{
+color:white;
+margin-left:15px;
+text-decoration:none;
+}
+
+.logout-btn{
+background:#ff4d4d;
+border:none;
+color:white;
+padding:5px 10px;
+border-radius:4px;
+cursor:pointer;
+margin-left:10px;
+}
+
+/* MESSAGES */
+
+.message{
+width:60%;
+margin:20px auto;
+padding:10px;
+background:#d4edda;
+border:1px solid #c3e6cb;
+border-radius:5px;
+text-align:center;
+}
+
+/* CONTENT */
+
+.container{
+width:80%;
+margin:auto;
+margin-top:30px;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:40px;
+padding:20px;
+text-align:center;
+background:#222;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="nav-left">
+
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'create_post' %}">Create Post</a>
+<a href="{% url 'about' %}">About</a>
+
+</div>
+
+
+<div class="nav-right">
+
+{% if user.is_authenticated %}
+
+<span>Welcome {{ user.username }}</span>
+
+<form action="{% url 'logout' %}" method="POST" style="display:inline;">
+{% csrf_token %}
+<button class="logout-btn" type="submit">Logout</button>
+</form>
+
+{% else %}
+
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'register' %}">Register</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+<!-- MESSAGES -->
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="message">
+{{ message }}
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+<!-- PAGE CONTENT -->
+
+<div class="container">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<p>© 2026 My Django Blog</p>
+<p>Developed by Sajlendra Pandey</p>
+
+</div>
+
+
+</body>
+</html>
