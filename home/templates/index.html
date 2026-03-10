@@ -127,7 +127,7 @@ border-radius:4px;
 Author : {{ post.user.username }}
 </div>
 
-{% if request.user == post.user %}
+{% if request.user == post.user or request.user.is_superuser %}
 
 <div class="actions" style="margin-top:10px;">
 
